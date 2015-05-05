@@ -31,7 +31,10 @@ static void	create_children(t_tree **node)
 		{
 			if ((*node)->action != SA)
 				(*node)->child[SA] = create_node(sa((*node)->pilea), (*node)->pileb, node, SA);
-			(*node)->child[RA] = create_node(ra((*node)->pilea), (*node)->pileb, node, RA);
+			if ((*node)->action != RRA)
+				(*node)->child[RA] = create_node(ra((*node)->pilea), (*node)->pileb, node, RA);
+			if ((*node)->action != RA)
+				(*node)->child[RRA] = create_node(rra((*node)->pilea), (*node)->pileb, node, RRA);
 			
 		}
 	}
@@ -42,16 +45,22 @@ static void	create_children(t_tree **node)
 		if ((*node)->pileb->next != NULL)
 		{
 			if ((*node)->action != SB)
-				(*node)->child[SB] = create_node(sa((*node)->pileb), (*node)->pilea, node, SB);
-			(*node)->child[RB] = create_node((*node)->pilea, ra((*node)->pileb), node, RB);
+				(*node)->child[SB] = create_node((*node)->pilea , sa((*node)->pileb), node, SB);
+			if ((*node)->action != RRB)
+				(*node)->child[RB] = create_node((*node)->pilea, ra((*node)->pileb), node, RB);
+			if ((*node)->action != RB)
+				(*node)->child[RRB] = create_node((*node)->pilea, rra((*node)->pileb), node, RRB);
 		}
 	}
 	if ((*node)->pilea != NULL && (*node)->pilea->next != NULL
 			&& (*node)->pileb != NULL && (*node)->pileb->next != NULL)
 	{
+		if ((*node)->action != RRR && (*node)->action != RRB && (*node)->action != RRA )
+			(*node)->child[RR] = create_node(ra((*node)->pilea), ra((*node)->pileb), node, RR);
+		if ((*node)->action != RR && (*node)->action != RB && (*node)->action != RA )
+			(*node)->child[RRR] = create_node(rra((*node)->pilea), rra((*node)->pileb), node, RRR);
 		if ((*node)->action != SS)
 			(*node)->child[SS] = create_node(sa((*node)->pilea), sa((*node)->pileb), node, SS);
-
 	}
 }
 
@@ -124,7 +133,7 @@ void	parkour_node(t_tree *tree)
 		create_children(&node);
 	//	ft_putchar('a');
 		i = -1;
-		while (++i <= RB)
+		while (++i <= RRR)
 		{
 	//		printf("%p\n", node->child[i]);
 			if (node->child[i] != NULL)
@@ -151,4 +160,5 @@ void	parkour_node(t_tree *tree)
 	}
 	print_parkour(node);
 	ft_putchar('\n');
+	delete_node(tree);
 }

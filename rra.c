@@ -18,13 +18,19 @@ static t_list   *init_tmpile(t_list *pile)
 
 t_list	*rra(t_list *pile)
 {
+	t_list	*end;
 	t_list	*begin;
-        t_list  *tmpile;
-
-        tmpile = init_tmpile(pile);
+	t_list  *tmpile;
+	
+	tmpile = init_tmpile(pile);
+	end = tmpile;
 	begin = tmpile;
-	tmpile = tmpile->next;
-	begin->next = NULL;
-	ft_lstaddback(&tmpile, begin);
+	while (end->next != NULL)
+		end = end->next;
+	ft_lstadd(&begin, end);
+	while (tmpile->next != end)
+	   tmpile = tmpile->next;
+	tmpile->next = NULL;
+	tmpile = begin;
 	return (tmpile);
 }

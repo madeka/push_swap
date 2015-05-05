@@ -22,17 +22,34 @@ int	main(int ac, char **av)
 	t_list *pilea;
 	t_list *pileb;
 	t_tree	*tree;
+//	t_duopile *duo;
 //	int	*tmp;
 
 	pileb = NULL;
 	pilea = create_pile(ac ,av);
 	tree = create_node(pilea, pileb, NULL, -1);
 	parkour_node(tree);
-/*	while (tree->pileb != NULL)
+/*	pilea = sa(pilea);
+	duo = pb(pilea, pileb);
+	duo = pb(duo->pilea, duo->pileb);
+	duo->pileb = sa(duo->pileb);
+	duo = pa(duo->pilea, duo->pileb);
+//	duo = pa(duo->pilea, duo->pileb);
+//	duo = pa(duo->pilea, duo->pileb);
+	pilea = duo->pilea;
+	pileb = duo->pileb;
+	while (pilea != NULL)
 	{
-		tmp = (int *)tree->pileb->content;
+		tmp = (int *)pilea->content;
 		ft_putnbr(*tmp);
-		tree->pileb = tree->pileb->next;
+		pilea = pilea->next;
+	}
+	ft_putchar('\n');
+	while (pileb != NULL)
+	{
+		tmp = (int *)pileb->content;
+		ft_putnbr(*tmp);
+		pileb = pileb->next;
 	}*/
 	return (0);
 }

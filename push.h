@@ -30,6 +30,6 @@ t_tree		*create_duo(t_duopile *piles, t_tree **node, int action);
 void		parkour_node(t_tree *tree);
 t_list		*ft_lstnewcust(void const *content, size_t content_size);
 t_duopile	*init_duo(t_list *pilea, t_list *pileb);
-
+void		delete_node(t_tree *node);
 
 #endif
