@@ -21,25 +21,18 @@ int	main(int ac, char **av)
 {
 	t_list *pilea;
 	t_list *pileb;
-	int	*tmp;
+	t_tree	*tree;
+//	int	*tmp;
 
 	pileb = NULL;
 	pilea = create_pile(ac ,av);
-	rra(&pilea);
-	while (pilea != NULL)
+	tree = create_node(pilea, pileb, NULL, -1);
+	parkour_node(tree);
+/*	while (tree->pileb != NULL)
 	{
-		tmp = (int *)pilea->content;
+		tmp = (int *)tree->pileb->content;
 		ft_putnbr(*tmp);
-		ft_putchar(' ');
-		pilea = pilea->next;
-	}
-	ft_putchar('\n');
-	while(pileb != NULL)
-	{
-		tmp = (int *)pileb->content;
-		ft_putnbr(*tmp);
-		ft_putchar(' ');
-		pileb = pileb->next;
-	}
+		tree->pileb = tree->pileb->next;
+	}*/
 	return (0);
 }

@@ -1,11 +1,30 @@
 #include "libft.h"
+#include <stdlib.h>
 
-void	rra(t_list **pile)
+static t_list   *init_tmpile(t_list *pile)
+{
+        t_list  *tmpile;
+
+        if (!(tmpile = (t_list *)malloc(sizeof(t_list))))
+                return (NULL);
+        tmpile = NULL;
+        while (pile != NULL)
+        {
+                ft_lstaddback(&tmpile, ft_lstnew(pile->content, sizeof(pile->content)));
+                pile = pile->next;
+        }
+        return (tmpile);
+}
+
+t_list	*rra(t_list *pile)
 {
 	t_list	*begin;
+        t_list  *tmpile;
 
-	begin = *pile;
-	*pile = (*pile)->next;
+        tmpile = init_tmpile(pile);
+	begin = tmpile;
+	tmpile = tmpile->next;
 	begin->next = NULL;
-	ft_lstaddback(pile, begin);
+	ft_lstaddback(&tmpile, begin);
+	return (tmpile);
 }
